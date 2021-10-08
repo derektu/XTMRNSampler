@@ -11,9 +11,9 @@ import { Sample3 } from './lib/screens/Sample3';
 // MainScreen: display buttons to navigate each sample screens
 //
 const screens = [
-  { id: '1', text: '範例#1', route: 'Sample1'},
-  { id: '2', text: '範例#2', route: 'Sample2'},
-  { id: '3', text: '範例#3', route: 'Sample3'},
+  { id: '1', text: '推薦股', route: 'Sample1', title: '推薦股'},
+  { id: '2', text: '範例#2', route: 'Sample2', title: 'S2'},
+  { id: '3', text: '範例#3', route: 'Sample3', title: 'S3'},
 ];
 
 const ScreenCell = ({item, navigation}) => {
@@ -24,7 +24,10 @@ const ScreenCell = ({item, navigation}) => {
             { opacity: pressed ? 0.5 : 1.0 },
             styles.button,
           ]}
-        onPress={() => navigation.navigate(item.route)}>
+        onPress={() => {
+          navigation.navigate(item.route, {title: item.title});
+        }}
+        >
         <Text style={styles.buttonText}>{item.text}</Text>
       </Pressable>
     </View>
@@ -47,6 +50,13 @@ const MainScreen = ({navigation}) => {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const ScreenOption = ({route}) => {
+    return {
+      headerBackTitleVisible: false,
+      title: route.params.title    
+    }
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
@@ -55,13 +65,19 @@ export default function App() {
           options={{title: 'XTMRN範例'}}/>
 
         <Stack.Screen name="Sample1"
-          component={Sample1}/>
+          component={Sample1}
+          options={ScreenOption}
+        />
 
         <Stack.Screen name="Sample2"
-          component={Sample2}/>
+          component={Sample2}
+          options={ScreenOption}
+        />
 
         <Stack.Screen name="Sample3"
-          component={Sample3}/>
+          component={Sample3}
+          options={ScreenOption}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>    
