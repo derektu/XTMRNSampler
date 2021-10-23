@@ -12,7 +12,7 @@ import { Sample3 } from './lib/screens/Sample3';
 //
 const screens = [
   { id: '1', text: '推薦股', route: 'Sample1', title: '推薦股'},
-  { id: '2', text: '範例#2', route: 'Sample2', title: 'S2'},
+  { id: '2', text: '首頁Widget', route: 'Sample2', title: '首頁'},
   { id: '3', text: '範例#3', route: 'Sample3', title: 'S3'},
 ];
 
